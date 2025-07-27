@@ -127,3 +127,33 @@ docker run --rm -v $(pwd)/sample_dataset/pdfs:/app/input:ro -v $(pwd)/sample_dat
 ---
 
 **Important**: This is a sample implementation. Participants should develop their own solutions that meet all the official challenge requirements and constraints. 
+
+
+----
+# My Approach:
+
+We extracted structured outlines from PDFs by analyzing font sizes and patterns using PyMuPDF. The logic determines heading levels (H1, H2, H3) and builds a JSON outline with titles and corresponding page numbers.
+
+# Libraries Used:
+
+Python 3.10
+
+PyMuPDF==1.23.22
+
+ # How to Build and Run:
+Build the Docker image:
+
+bash
+Copy
+Edit
+docker build -t adobe1a-dummy .
+Run it on input/output folders:
+
+bash
+Copy
+Edit
+docker run --rm `
+  -v "${PWD}\sample_dataset\pdfs:/app/input" `
+  -v "${PWD}\sample_dataset\outputs:/app/output" `
+  --network none `
+  adobe1a-dummy

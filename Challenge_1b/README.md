@@ -90,4 +90,54 @@ Challenge_1b/
 
 ---
 
-**Note**: This README provides a brief overview of the Challenge 1b solution structure based on available sample data. 
+**Note**: This README provides a brief overview of the Challenge 1b solution structure based on available sample data.
+
+# 1. My Approach
+We designed a persona-driven content extraction pipeline to analyze multiple PDF documents across three collections. For each collection:
+
+The input JSON specifies the task, user persona, and documents to analyze.
+
+Our script parses each PDF and scans its text content page by page.
+
+We score each page's relevance based on keyword overlap with the persona and task.
+
+The most relevant sections are ranked by importance and structured into the required JSON format.
+
+The solution is fully automated and works for any number of PDFs and personas.
+
+# 2. Models or Libraries Used
+Python 3.10
+
+PyMuPDF (fitz) – for extracting text from PDFs
+
+JSON – for reading and writing input/output files
+
+No machine learning model was used; the solution is based on rule-based text scoring using keyword overlap.
+
+# 3. How to Build and Run the Solution
+🛠 Build the Docker image:
+
+bash
+Copy
+Edit
+docker build -t adobe1b-runner .
+🚀 Run the container (from inside Challenge_1b folder on Windows PowerShell):
+
+powershell
+Copy
+Edit
+docker run --rm `
+  -v "${PWD}\Collection 1:/app/Collection 1" `
+  -v "${PWD}\Collection 2:/app/Collection 2" `
+  -v "${PWD}\Collection 3:/app/Collection 3" `
+  --network none `
+  adobe1b-runner
+📂 Each collection will generate a file:
+
+Collection 1/challenge1b_output.json
+
+Collection 2/challenge1b_output.json
+
+Collection 3/challenge1b_output.json
+
+These contain the extracted and ranked sections in the required schema.
